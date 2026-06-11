@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="sv" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Släktbok över Söderhamns Stad (1640–1794) av Anders Olsson</title>
+  <meta name="description" content="Släktbok över Söderhamns Stad är ett pågående onlineprojekt av Anders Olsson som kartlägger alla invånare och deras familjerelationer i Söderhamn från stadens grundande 1620 fram till år 1800. Byggd på kyrkböcker, mantalslängder, domböcker, bouppteckningar och andra historiska källor.">
+  <script>document.documentElement.classList.replace("no-js", "js");</script>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <!-- ==================== HERO ==================== -->
+  <header class="hero">
+    <canvas id="hero-canvas" class="hero__canvas" aria-hidden="true"></canvas>
+    <div class="hero__inner container">
+      <p class="hero__kicker">Ett pågående släktforskningsprojekt av Anders Olsson</p>
+      <h1 class="hero__title">Släktbok över<br>Söderhamns Stad</h1>
+      <p class="hero__tagline">
+        En levande rekonstruktion av stadens människor, familjer, hushåll och
+        yrken — uppbyggd källa för källa,
+        <span data-bind="coverageRange">1640–1794</span>.
+      </p>
+      <div class="hero__stats js-only" aria-hidden="true">
+        <span class="hero__chip"><strong data-bind="individualCount">8 777</strong> individer</span>
+        <span class="hero__chip"><strong data-bind="coverageRange">1640–1794</strong> täckning</span>
+        <span class="hero__chip">Uppdaterad <strong data-bind="lastUpdated">2025</strong></span>
+      </div>
+      <div class="hero__actions">
+        <a class="btn btn--primary" href="./slaktbok/" data-bind-href="slaktbokUrl">Öppna Släktboken</a>
+        <a class="btn btn--ghost" href="#om-projektet">Om projektet</a>
+      </div>
+    </div>
+    <div class="hero__fade" aria-hidden="true"></div>
+  </header>
+
+  <main>
+
+    <!-- ==================== OM PROJEKTET ==================== -->
+    <section id="om-projektet" class="section" aria-labelledby="om-rubrik">
+      <div class="container container--narrow">
+        <p class="section__kicker">Om projektet</p>
+        <h2 id="om-rubrik" class="section__title">Inte bara en lista med uppgifter</h2>
+        <div class="prose reveal">
+          <p>
+            <em>Släktbok över Söderhamns Stad</em> är ett pågående onlineprojekt
+            av Anders Olsson som syftar till att kartlägga alla invånare och
+            deras familjerelationer i Söderhamn från stadens grundande 1620
+            fram till år 1800. Webbplatsen, som är fritt tillgänglig för alla,
+            är under kontinuerlig uppbyggnad för att täcka målperioden och
+            uppdateras regelbundet.
+          </p>
+          <p>
+            Den innehåller genealogisk information som födelse-, vigsel- och
+            dödsdata, yrken och bostadsorter, noggrant sammanställd från ett
+            brett spektrum av källor som kyrkböcker, mantalslängder, domböcker
+            och bouppteckningar — alltid med källhänvisning. Resursen är
+            värdefull för släktforskare, lokalhistoriker och andra som vill
+            hitta personer, förstå släktsamband eller få en överblick över
+            Söderhamns befolkning under 1600- och 1700-talen.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== STATISTIK ==================== -->
+    <section class="section section--tinted js-only" aria-labelledby="statistik-rubrik">
+      <div class="container">
+        <h2 id="statistik-rubrik" class="visually-hidden">Projektets omfattning i siffror</h2>
+        <dl class="stats reveal" id="stats-strip">
+          <!-- Genereras av main.js från assets/data/site-data.js -->
+        </dl>
+      </div>
+    </section>
+
+    <!-- ==================== FRÅN KÄLLA TILL PERSON ==================== -->
+    <section class="section" aria-labelledby="metod-rubrik">
+      <div class="container">
+        <p class="section__kicker">Arbetssättet</p>
+        <h2 id="metod-rubrik" class="section__title">Från källa till person</h2>
+        <ol class="process reveal">
+          <li class="process__step">
+            <span class="process__num" aria-hidden="true">1</span>
+            <h3>Källorna</h3>
+            <p>Kyrkböcker, mantalslängder, domböcker, bouppteckningar och
+               räkenskaper gås igenom sida för sida, år för år.</p>
+          </li>
+          <li class="process__step">
+            <span class="process__num" aria-hidden="true">2</span>
+            <h3>Tolkning</h3>
+            <p>Handskrivna notiser tyds och skrivs av. Namn, datum, yrken
+               och platser tolkas i sitt historiska sammanhang.</p>
+          </li>
+          <li class="process__step">
+            <span class="process__num" aria-hidden="true">3</span>
+            <h3>Individ och familj</h3>
+            <p>Uppgifter från olika källor knyts samman till individer,
+               familjer och hushåll — alltid med källhänvisning.</p>
+          </li>
+          <li class="process__step">
+            <span class="process__num" aria-hidden="true">4</span>
+            <h3>Släktboken</h3>
+            <p>Materialet sammanställs i släktforskningsprogrammet
+               Min Släkt och publiceras som den fritt tillgängliga Släktboken.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ==================== KÄLLORNA ==================== -->
+    <section class="section section--tinted js-only" aria-labelledby="kallor-rubrik">
+      <div class="container">
+        <p class="section__kicker">Materialet</p>
+        <h2 id="kallor-rubrik" class="section__title">Källorna</h2>
+        <ul class="sources reveal" id="sources-grid">
+          <!-- Genereras av main.js från assets/data/site-data.js -->
+        </ul>
+      </div>
+    </section>
+
+    <!-- ==================== TIDSLINJE ==================== -->
+    <section class="section js-only" aria-labelledby="tidslinje-rubrik">
+      <div class="container container--narrow">
+        <p class="section__kicker">Täckning</p>
+        <h2 id="tidslinje-rubrik" class="section__title">Ett arkiv som växer</h2>
+        <p class="section__lead" id="timeline-summary"></p>
+        <div class="timeline reveal" id="coverage-timeline">
+          <!-- Genereras av main.js från assets/data/site-data.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== UPPDATERINGSHISTORIK ==================== -->
+    <section id="uppdateringar" class="section section--tinted js-only" aria-labelledby="historik-rubrik">
+      <div class="container container--narrow">
+        <p class="section__kicker">Forskningslogg</p>
+        <h2 id="historik-rubrik" class="section__title">Uppdateringshistorik</h2>
+        <ol class="updates reveal" id="update-history">
+          <!-- Genereras av main.js från assets/data/site-data.js -->
+        </ol>
+      </div>
+    </section>
+
+    <!-- ==================== KONTAKT ==================== -->
+    <section class="section" aria-labelledby="kontakt-rubrik">
+      <div class="container container--narrow">
+        <p class="section__kicker">Kontakt</p>
+        <h2 id="kontakt-rubrik" class="section__title">Hör gärna av dig</h2>
+        <div class="prose">
+          <p>
+            Tveka inte att kontakta mig på
+            <a href="mailto:anders_olsson@rocketmail.com" data-bind-mailto="contactEmail">anders_olsson@rocketmail.com</a>
+            om du har frågor, rättelser eller ytterligare information.
+          </p>
+          <p>
+            Du kan även göra ett inlägg eller läsa andras på
+            <a href="https://forum.rotter.se/index.php?topic=169243.0" data-bind-href="anbytarforumUrl" rel="external">Anbytarforum</a>.
+          </p>
+        </div>
+        <div class="contact-cta">
+          <a class="btn btn--primary" href="./slaktbok/" data-bind-href="slaktbokUrl">Öppna Släktboken</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== SIDFOT ==================== -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p class="footer__title">Släktbok över Söderhamns Stad</p>
+      <p class="footer__meta">
+        Av Anders Olsson ·
+        <a href="./slaktbok/" data-bind-href="slaktbokUrl">Släktboken</a> ·
+        <a href="https://forum.rotter.se/index.php?topic=169243.0" data-bind-href="anbytarforumUrl" rel="external">Anbytarforum</a> ·
+        <a href="mailto:anders_olsson@rocketmail.com" data-bind-mailto="contactEmail">Kontakt</a>
+      </p>
+      <p class="footer__meta js-only">Senast uppdaterad <span data-bind="lastUpdated"></span> · <span data-bind="individualCount"></span> individer · <span data-bind="coverageRange"></span></p>
+    </div>
+  </footer>
+
+  <script src="assets/data/site-data.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

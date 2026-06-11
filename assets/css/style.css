@@ -1,0 +1,557 @@
+/* ============================================================
+   Släktbok över Söderhamns Stad — startsidans stilmall
+   Gammalt material, modernt gränssnitt.
+   ============================================================ */
+
+:root {
+  --paper: #f6f1e7;
+  --paper-deep: #efe8d8;
+  --card: #fbf8f1;
+  --ink: #2b2620;
+  --ink-soft: #5c5347;
+  --accent: #8a4a2b;
+  --accent-deep: #74391e;
+  --line: #ddd2bc;
+  --line-soft: #e8dfcc;
+  --shadow: 0 1px 2px rgba(43, 38, 32, 0.06), 0 6px 18px rgba(43, 38, 32, 0.07);
+
+  --font-serif: Georgia, "Times New Roman", "Iowan Old Style", "Palatino Linotype", serif;
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: clamp(1rem, 0.95rem + 0.25vw, 1.0625rem);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 0 0 0.5em;
+}
+
+p { margin: 0 0 1em; }
+
+a {
+  color: var(--accent-deep);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+a:hover { color: var(--accent); }
+
+a:focus-visible,
+.btn:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+.container--narrow { max-width: 760px; }
+
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Sektioner som helt genereras av JavaScript döljs utan JS,
+   så att tomma rubriker inte visas. */
+.no-js .js-only { display: none !important; }
+
+/* ==================== Knappar ==================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0.7rem 1.6rem;
+  border-radius: 6px;
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 160ms ease, color 160ms ease, transform 160ms ease;
+}
+
+.btn--primary {
+  background: var(--accent-deep);
+  color: #fdfaf4;
+  box-shadow: var(--shadow);
+}
+.btn--primary:hover {
+  background: var(--accent);
+  color: #fdfaf4;
+  transform: translateY(-1px);
+}
+
+.btn--ghost {
+  color: var(--ink);
+  border: 1px solid var(--line);
+  background: rgba(251, 248, 241, 0.6);
+}
+.btn--ghost:hover {
+  border-color: var(--accent);
+  color: var(--accent-deep);
+}
+
+/* ==================== Hero ==================== */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 20% -10%, #fbf6ea 0%, transparent 55%),
+    linear-gradient(180deg, var(--paper-deep) 0%, var(--paper) 100%);
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.hero__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.hero__inner {
+  position: relative;
+  z-index: 1;
+  padding-top: clamp(4.5rem, 10vw, 8rem);
+  padding-bottom: clamp(4rem, 9vw, 7rem);
+  text-align: center;
+}
+
+.hero__kicker {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+  margin-bottom: 1.25rem;
+}
+
+.hero__title {
+  font-size: clamp(2.4rem, 1.6rem + 4.5vw, 4.5rem);
+  letter-spacing: -0.01em;
+  margin-bottom: 1rem;
+}
+
+.hero__tagline {
+  max-width: 38em;
+  margin: 0 auto 1.75rem;
+  font-size: clamp(1.05rem, 1rem + 0.4vw, 1.25rem);
+  color: var(--ink-soft);
+}
+
+.hero__stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-bottom: 2.25rem;
+}
+
+.hero__chip {
+  display: inline-block;
+  padding: 0.35rem 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(251, 248, 241, 0.75);
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+.hero__chip strong { color: var(--ink); font-variant-numeric: tabular-nums; }
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.hero__fade {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 5rem;
+  background: linear-gradient(180deg, transparent, var(--paper));
+  pointer-events: none;
+}
+
+/* ==================== Sektioner ==================== */
+
+.section { padding: clamp(3.5rem, 8vw, 6rem) 0; }
+
+.section--tinted {
+  background: var(--paper-deep);
+  border-top: 1px solid var(--line-soft);
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.section__kicker {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+  margin-bottom: 0.5rem;
+}
+
+.section__title {
+  font-size: clamp(1.7rem, 1.4rem + 1.5vw, 2.4rem);
+  margin-bottom: 1.25rem;
+}
+
+.section__lead {
+  color: var(--ink-soft);
+  max-width: 42em;
+}
+
+.prose { max-width: 42em; }
+.prose p { margin-bottom: 1.1em; }
+
+/* ==================== Statistik ==================== */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin: 0;
+}
+
+.stat {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 1.4rem 1.5rem;
+  box-shadow: var(--shadow);
+}
+
+.stat dt {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 0.3rem;
+}
+
+.stat dd {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: clamp(1.6rem, 1.3rem + 1.2vw, 2.2rem);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+
+.stat dd small {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--ink-soft);
+  margin-top: 0.2rem;
+}
+
+/* ==================== Från källa till person ==================== */
+
+.process {
+  list-style: none;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  counter-reset: step;
+}
+
+.process__step {
+  position: relative;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+}
+
+.process__num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 50%;
+  background: var(--accent-deep);
+  color: #fdfaf4;
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 0.9rem;
+}
+
+.process__step h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.4rem;
+}
+
+.process__step p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+}
+
+/* ==================== Källor ==================== */
+
+.sources {
+  list-style: none;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.source-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+}
+
+.source-card__icon {
+  width: 2rem;
+  height: 2rem;
+  color: var(--accent-deep);
+  margin-bottom: 0.8rem;
+}
+
+.source-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.4rem;
+}
+
+.source-card p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+}
+
+/* ==================== Tidslinje ==================== */
+
+.timeline { margin-top: 2.25rem; }
+
+.timeline__track {
+  position: relative;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--line-soft);
+  border: 1px solid var(--line);
+}
+
+.timeline__fill {
+  position: absolute;
+  top: -1px; bottom: -1px; left: -1px;
+  width: 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent-deep), var(--accent));
+  transition: width 1400ms cubic-bezier(0.25, 0.7, 0.3, 1);
+}
+
+.timeline__marker {
+  position: absolute;
+  top: 50%;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 3px solid var(--card);
+  box-shadow: var(--shadow);
+  transform: translate(-50%, -50%);
+}
+
+.timeline__labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.7rem;
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+
+.timeline__labels .timeline__now {
+  color: var(--accent-deep);
+  font-weight: 600;
+}
+
+/* ==================== Uppdateringshistorik ==================== */
+
+.updates {
+  list-style: none;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  position: relative;
+}
+
+/* lodrät "loggbokslinje" */
+.updates::before {
+  content: "";
+  position: absolute;
+  top: 0.5rem; bottom: 0.5rem;
+  left: 0.55rem;
+  width: 2px;
+  background: var(--line);
+}
+
+.update {
+  position: relative;
+  padding: 0 0 1.5rem 2.4rem;
+}
+.update:last-child { padding-bottom: 0; }
+
+.update::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.45rem;
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+  background: var(--accent-deep);
+  border: 2px solid var(--paper-deep);
+  margin-left: 0.16rem;
+}
+
+.update__card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 1.25rem 1.5rem;
+  box-shadow: var(--shadow);
+}
+
+.update__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem 1rem;
+  margin-bottom: 0.6rem;
+}
+
+.update__date {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.update__meta {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+
+.update__badge {
+  display: inline-block;
+  padding: 0.1rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  font-size: 0.8rem;
+  color: var(--accent-deep);
+  font-weight: 600;
+}
+
+.update__items {
+  margin: 0;
+  padding-left: 1.2rem;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+}
+.update__items li { margin-bottom: 0.2rem; }
+
+/* ==================== Kontakt & sidfot ==================== */
+
+.contact-cta { margin-top: 2rem; }
+
+.footer {
+  background: var(--ink);
+  color: #cfc6b8;
+  padding: 2.5rem 0;
+}
+
+.footer__inner { text-align: center; }
+
+.footer__title {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  color: #f1ebdf;
+  margin-bottom: 0.5rem;
+}
+
+.footer__meta {
+  font-size: 0.9rem;
+  margin-bottom: 0.3rem;
+}
+
+.footer a { color: #e8ddc8; }
+.footer a:hover { color: #ffffff; }
+.footer a:focus-visible { outline-color: #e8ddc8; }
+
+/* ==================== Reveal-animationer ==================== */
+
+.js .reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 600ms ease, transform 600ms ease;
+}
+.js .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ==================== Reducerad rörelse ==================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  .js .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .timeline__fill { transition: none; }
+
+  .btn--primary:hover { transform: none; }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
