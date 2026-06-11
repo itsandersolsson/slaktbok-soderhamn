@@ -61,7 +61,7 @@
   if (stats) {
     var items = [
       { label: "Individer", value: formatNumber(data.individualCount), note: "och fler för varje uppdatering" },
-      { label: "Täckning", value: coverageRange, note: "mål: " + data.coverageStart + "–" + data.coverageGoal },
+      { label: "Täckning", value: coverageRange, note: "mål: " + data.foundingYear + "–" + data.coverageGoal },
       { label: "Källtyper", value: String(data.sources.length), note: "alltid med källhänvisning" },
       { label: "Senast uppdaterad", value: latest ? latest.date : "—", note: latest ? latest.items[0] : "" }
     ];
@@ -121,51 +121,59 @@
     var summary = document.getElementById("timeline-summary");
     if (summary) {
       summary.textContent =
-        "Släktboken täcker i dag åren " + coverageRange + ". Arbetet fortsätter " +
-        "framåt mot målåret " + data.coverageGoal + ", källa för källa.";
+        "Söderhamn grundades " + data.foundingYear + ". Släktboken täcker i dag åren " +
+        coverageRange + ", och arbetet fortsätter, källa för källa, både bakåt mot " +
+        "grundandet och framåt mot målåret " + data.coverageGoal + ".";
     }
 
-    var span = data.coverageGoal - data.coverageStart;
-    var pct = Math.max(0, Math.min(1, (data.coverageEnd - data.coverageStart) / span));
+    // Tidslinjens hela spann är grundandet till målåret. Den ifyllda
+    // delen visar vad som faktiskt är källtäckt just nu inom det spannet.
+    var trackStart = data.foundingYear;
+    var trackEnd = data.coverageGoal;
+    var trackSpan = trackEnd - trackStart;
+
+    function toPct(year) {
+      return Math.max(0, Math.min(1, (year - trackStart) / trackSpan));
+    }
+
+    var fillStartPct = toPct(data.coverageStart);
+    var fillEndPct = toPct(data.coverageEnd);
+    var fillLeft = (fillStartPct * 100).toFixed(2) + "%";
+    var fillWidth = ((fillEndPct - fillStartPct) * 100).toFixed(2) + "%";
+    var markerLeft = (fillEndPct * 100).toFixed(2) + "%";
 
     var track = el("div", "timeline__track");
     var fill = el("div", "timeline__fill");
     var marker = el("div", "timeline__marker");
     marker.setAttribute("aria-hidden", "true");
+    marker.setAttribute("title", "Källtäckning t.o.m. " + data.coverageEnd);
     track.appendChild(fill);
     track.appendChild(marker);
 
     var labels = el("div", "timeline__labels");
-    labels.appendChild(el("span", null, String(data.coverageStart)));
-    var now = el("span", "timeline__now", String(data.coverageEnd));
-    labels.appendChild(now);
-    labels.appendChild(el("span", null, String(data.coverageGoal)));
+    labels.appendChild(el("span", "timeline__label--start", String(data.foundingYear) + " (grundad)"));
+    labels.appendChild(el("span", "timeline__label--end", String(data.coverageGoal) + " (mål)"));
 
     timeline.setAttribute("role", "img");
     timeline.setAttribute(
       "aria-label",
-      "Tidslinje: täckning " + coverageRange + " av målperioden " +
-      data.coverageStart + " till " + data.coverageGoal + "."
+      "Tidslinje: källtäckning " + coverageRange + " inom projektets fulla spann " +
+      data.foundingYear + " till " + data.coverageGoal + "."
     );
     timeline.appendChild(track);
     timeline.appendChild(labels);
 
-    var targetWidth = (pct * 100).toFixed(1) + "%";
-    marker.style.left = targetWidth;
-    // Placera årtalet för täckningens slut ungefär vid markören
-    now.style.position = "absolute";
-    now.style.left = targetWidth;
-    now.style.transform = "translateX(-50%)";
-    labels.style.position = "relative";
+    fill.style.left = fillLeft;
+    marker.style.left = markerLeft;
 
     if (reducedMotion || !("IntersectionObserver" in window)) {
-      fill.style.width = targetWidth;
+      fill.style.width = fillWidth;
     } else {
       fill.style.width = "0%";
       var tlObserver = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
           if (entry.isIntersecting) {
-            fill.style.width = targetWidth;
+            fill.style.width = fillWidth;
             tlObserver.disconnect();
           }
         });

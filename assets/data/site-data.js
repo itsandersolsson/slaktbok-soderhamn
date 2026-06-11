@@ -18,9 +18,10 @@ const SITE_DATA = {
   author: "Anders Olsson",
 
   /* --- Täckning och omfattning --------------------------------- */
-  coverageStart: 1640,   // första år med källtäckning
+  foundingYear: 1620,    // Söderhamns grundande — projektets bortre mål bakåt i tiden
+  coverageStart: 1640,   // första år med källtäckning just nu
   coverageEnd: 1794,     // sista år med källtäckning — uppdatera vid ny årgång
-  coverageGoal: 1800,    // projektets målår (styr tidslinjens slutpunkt)
+  coverageGoal: 1800,    // projektets målår framåt i tiden
 
   /* PLATSHÅLLARE — uppdatera till aktuellt antal individer */
   individualCount: 8777,
