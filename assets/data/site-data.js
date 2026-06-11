@@ -7,6 +7,10 @@
      1. Ändra coverageEnd om täckningen utökats (t.ex. 1794 -> 1795)
      2. Ändra individualCount till aktuellt antal individer
      3. Lägg till en ny post ÖVERST i listan "updates" nedan
+     4. VIKTIGT: Öppna index.html och ändra "?v=ÅÅÅÅ-MM-DD" till
+        dagens datum på de tre <script>/<link>-raderna längst ner
+        och i <head>. Annars kan besökares webbläsare visa en
+        gammal, cachad version av denna fil. Se README.md.
    Statistik, tidslinje, "senaste uppdatering" och hela
    uppdateringshistoriken på startsidan genereras automatiskt
    från dessa värden.

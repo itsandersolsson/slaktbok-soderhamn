@@ -25,9 +25,29 @@ Vid en ny uppdatering av Släktboken:
 1. Ändra `coverageEnd` om täckningen utökats (t.ex. `1794` → `1795`)
 2. Ändra `individualCount` till aktuellt antal individer
 3. Lägg till en ny post **överst** i listan `updates` (mall finns i filen)
+4. **Viktigt:** öppna `index.html` och uppdatera `?v=ÅÅÅÅ-MM-DD` (sätt
+   till dagens datum) på de tre raderna som laddar `style.css`,
+   `site-data.js` och `main.js` — se avsnittet om cache nedan.
 
 Statistik, tidslinje, "Senaste uppdatering" och hela uppdateringshistoriken
 genereras automatiskt från dessa värden.
+
+### Varför webbläsaren ibland visar gammalt innehåll (cache)
+
+Webbhotell sätter ofta långa cachetider på `.js`- och `.css`-filer, så
+besökares webbläsare kan fortsätta visa en gammal version av
+`site-data.js` även efter att du laddat upp den nya. Lösningen är att
+filerna laddas med en versionsstämpel i `index.html`, t.ex.:
+
+```html
+<script src="assets/data/site-data.js?v=2025-06-11"></script>
+```
+
+När du ändrar `site-data.js` (eller `style.css`/`main.js`), ändra
+**bara datumet i `?v=...`** på respektive rad i `index.html` till
+dagens datum. Webbläsaren ser då en ny URL och hämtar den uppdaterade
+filen. Om du glömmer detta kan vissa besökare fortsätta se gammalt
+innehåll tills deras cache går ut av sig själv.
 
 ### Ändra länken till Släktboken
 
