@@ -40,7 +40,7 @@ besökares webbläsare kan fortsätta visa en gammal version av
 filerna laddas med en versionsstämpel i `index.html`, t.ex.:
 
 ```html
-<script src="assets/data/site-data.js?v=2025-06-11"></script>
+<script src="assets/data/site-data.js?v=2026-06-11"></script>
 ```
 
 När du ändrar `site-data.js` (eller `style.css`/`main.js`), ändra

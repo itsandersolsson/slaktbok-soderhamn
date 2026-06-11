@@ -32,6 +32,10 @@
   var coverageRange = data.coverageStart + "–" + data.coverageEnd;
   var latest = data.updates && data.updates.length ? data.updates[0] : null;
 
+  // Håll fliktiteln i takt med täckningen så att den inte behöver
+  // uppdateras för hand i index.html (den statiska titeln är reserv).
+  document.title = data.projectTitle + " (" + coverageRange + ") av " + data.author;
+
   /* ---------- Databindning av enkla värden och länkar ---------- */
 
   var bindings = {
