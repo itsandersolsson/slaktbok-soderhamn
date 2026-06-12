@@ -230,9 +230,9 @@
   }
 
   /* ============================================================
-     Hero-bakgrund: ett stilla nätverk av punkter och tunna
-     linjer (familjenätverk) med svaga arkivetiketter som driver
-     förbi. Rent dekorativ — bygger INTE på databasens innehåll.
+     Hero-bakgrund: svaga arkivfragment — källnamn, årtal och
+     yrken — som långsamt driver förbi över pappersbakgrunden.
+     Rent dekorativ — bygger INTE på databasens innehåll.
      ============================================================ */
 
   var canvas = document.getElementById("hero-canvas");
@@ -241,7 +241,7 @@
     var hero = canvas.parentElement;
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
     var width = 0, height = 0;
-    var nodes = [], labels = [];
+    var labels = [];
     var running = false;
     var lastFrame = 0;
     var FRAME_INTERVAL = 1000 / 30; // max ~30 fps räcker gott
@@ -264,72 +264,39 @@
     }
 
     function seed() {
-      var count = Math.round(Math.min(46, Math.max(18, width / 34)));
-      nodes = [];
-      for (var i = 0; i < count; i++) {
-        nodes.push({
-          x: Math.random() * width,
-          y: Math.random() * height,
-          vx: (Math.random() - 0.5) * 0.16,
-          vy: (Math.random() - 0.5) * 0.16,
-          r: 1.2 + Math.random() * 1.6
-        });
-      }
-      var labelCount = width < 640 ? 4 : 7;
+      var labelCount = width < 640 ? 6 : 10;
       labels = [];
-      for (var j = 0; j < labelCount; j++) {
+      for (var i = 0; i < labelCount; i++) {
         labels.push(newLabel(true));
       }
     }
 
     function newLabel(anywhere) {
+      var maxLife = 900 + Math.random() * 600;
       return {
         text: LABEL_TEXTS[Math.floor(Math.random() * LABEL_TEXTS.length)],
         x: Math.random() * width,
         y: anywhere ? Math.random() * height : height + 20,
+        vx: (Math.random() - 0.5) * 0.04,
         vy: -(0.05 + Math.random() * 0.08),
-        life: 0,
-        maxLife: 900 + Math.random() * 600
+        size: 12 + Math.random() * 3,
+        italic: Math.random() < 0.4,
+        // Startetiketter får en bit av sin livstid "förbrukad" så att
+        // den första (statiska) bilden inte är tom — viktigt för
+        // besökare med prefers-reduced-motion.
+        life: anywhere ? 120 + Math.random() * maxLife * 0.5 : 0,
+        maxLife: maxLife
       };
     }
-
-    var LINK_DIST = 120;
 
     function draw() {
       ctx.clearRect(0, 0, width, height);
 
-      // Linjer mellan närliggande punkter
-      for (var i = 0; i < nodes.length; i++) {
-        for (var j = i + 1; j < nodes.length; j++) {
-          var dx = nodes[i].x - nodes[j].x;
-          var dy = nodes[i].y - nodes[j].y;
-          var dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < LINK_DIST) {
-            var alpha = 0.10 * (1 - dist / LINK_DIST);
-            ctx.strokeStyle = "rgba(43, 38, 32, " + alpha.toFixed(3) + ")";
-            ctx.lineWidth = 1;
-            ctx.beginPath();
-            ctx.moveTo(nodes[i].x, nodes[i].y);
-            ctx.lineTo(nodes[j].x, nodes[j].y);
-            ctx.stroke();
-          }
-        }
-      }
-
-      // Punkter
-      ctx.fillStyle = "rgba(116, 57, 30, 0.28)";
-      nodes.forEach(function (n) {
-        ctx.beginPath();
-        ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-        ctx.fill();
-      });
-
-      // Svaga arkivetiketter
-      ctx.font = "13px Georgia, serif";
       labels.forEach(function (l) {
         var fade = Math.min(l.life / 120, (l.maxLife - l.life) / 120, 1);
         if (fade <= 0) return;
-        ctx.fillStyle = "rgba(92, 83, 71, " + (0.16 * fade).toFixed(3) + ")";
+        ctx.font = (l.italic ? "italic " : "") + l.size.toFixed(1) + "px Georgia, serif";
+        ctx.fillStyle = "rgba(92, 83, 71, " + (0.20 * fade).toFixed(3) + ")";
         ctx.fillText(l.text, l.x, l.y);
       });
     }
@@ -340,17 +307,9 @@
       if (now - lastFrame < FRAME_INTERVAL) return;
       lastFrame = now;
 
-      nodes.forEach(function (n) {
-        n.x += n.vx;
-        n.y += n.vy;
-        if (n.x < -10) n.x = width + 10;
-        if (n.x > width + 10) n.x = -10;
-        if (n.y < -10) n.y = height + 10;
-        if (n.y > height + 10) n.y = -10;
-      });
-
       for (var i = 0; i < labels.length; i++) {
         var l = labels[i];
+        l.x += l.vx;
         l.y += l.vy;
         l.life++;
         if (l.life > l.maxLife || l.y < -20) labels[i] = newLabel(false);
